@@ -52,6 +52,7 @@ struct song_node *construct_song(char *n, char *art) {
   struct song_node *s = malloc(sizeof(struct song_node));
   strncpy(s->name,n,sizeof(s->name - 1));
   strncpy(s->artist,art,sizeof(s->artist - 1));
+  s->next = NULL;
 
   return s;
 }
