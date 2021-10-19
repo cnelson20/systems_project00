@@ -5,10 +5,11 @@
 struct song_node;
 struct song_node *construct_song(char *n, char *art);
 int compare_songs(struct song_node *a, struct song_node *b);
-struct song_node *insert_front(struct song_node *head, char *n, char *art);
+struct song_node *insert_front(struct song_node *head, struct song_node *new);
 struct song_node * insert_node(struct song_node *head, struct song_node *new);
 int  strcasecmp(const char *, const char *);
 int print_list(struct song_node *head);
+int tolower(unsigned char ch);
 int main();
 
 
@@ -21,14 +22,16 @@ struct song_node {
 int main() {
   struct song_node *a_to_z[26];
   a_to_z[0] = construct_song("Thunderstruck","AC-DC");
+  a_to_z[0] = insert_node(a_to_z[0],construct_song("Dirty Deeds Done Dirt Cheap","AC-DC"));
+  print_list(a_to_z[0]);
 }
 
-struct song_node *insert_front(struct song_node *head,char struct_node *new) {
-  s->next = head;
+struct song_node *insert_front(struct song_node *head,struct song_node *new) {
+  new->next = head;
   return new;
 }
 struct song_node *insert_node(struct song_node *head, struct song_node *new) {
-  struct song_node *copy = *head;
+  struct song_node *copy = head;
   while (copy->next) {
     if (compare_songs(copy,new) > 0) {
       if (copy == head) {
@@ -50,8 +53,8 @@ struct song_node *insert_node(struct song_node *head, struct song_node *new) {
 
 struct song_node *construct_song(char *n, char *art) {
   struct song_node *s = malloc(sizeof(struct song_node));
-  strncpy(s->name,n,sizeof(s->name - 1));
-  strncpy(s->artist,art,sizeof(s->artist - 1));
+  strncpy(s->name,n,100- 1);
+  strncpy(s->artist,art,sizeof(s->artist) - 1);
   s->next = NULL;
 
   return s;
@@ -60,11 +63,12 @@ struct song_node *construct_song(char *n, char *art) {
 int print_list(struct song_node *head) {
   while (head) {
     printf("%s by %s\n",head->name,head->artist);
+    head = head->next;
   }
       printf("\n");
 }
 
-char tolower(unsigned char ch) {
+int tolower(unsigned char ch) {
     if (ch >= 'A' && ch <= 'Z')
         ch = 'a' + (ch - 'A');
     return ch;
