@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
 struct song_node;
 struct song_node *construct_song(char *n, char *art);
@@ -105,7 +106,7 @@ struct song_node *find_first_song(struct song_node *list,char *artist) {
 }
 struct song_node *random_song(struct song_node *list) {
   struct song_node *copy = list;
-  int length;
+  int length = 1;
   while (copy = copy->next) {length++;}
   int r = rand() % length;
   while (r) {
