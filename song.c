@@ -2,27 +2,11 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include "song.h"
 
-struct song_node;
-struct song_node *construct_song(char *n, char *art);
-int compare_songs(struct song_node *a, struct song_node *b);
-struct song_node *insert_front(struct song_node *head, struct song_node *new);
-struct song_node * insert_node(struct song_node *head, struct song_node *new);
-int  strcasecmp(const char *, const char *);
-int print_song(struct song_node *s);
-int print_list(struct song_node *head);
-struct song_node *find_song(struct song_node *list,char *name, char *artist);
-struct song_node *find_first_song(struct song_node *list,char *artist);
-struct song_node *random_song(struct song_node *list);
+int strcasecmp(const char *, const char *);
 int tolower(unsigned char ch);
 int main();
-
-
-struct song_node {
-  char name[100];
-  char artist[100];
-  struct song_node *next;
-};
 
 int main() {
   srand(time(NULL));
@@ -31,11 +15,35 @@ int main() {
   a_to_z[0] = construct_song("Highway to Hell","AC-DC");
   a_to_z[0] = insert_node(a_to_z[0],construct_song("Thunderstruck","AC-DC"));
   a_to_z[0] = insert_node(a_to_z[0],construct_song("Dirty Deeds Done Dirt Cheap","AC-DC"));
+  a_to_z[0] = insert_node(a_to_z[0],construct_song("Dude Looks Like a Lady","Aerosmith"));
   print_list(a_to_z[0]);
 
   printf("Should be Highway to Hell: ");print_song(find_song(a_to_z[0],"Highway to Hell","AC-DC"));
   printf("Should be D4C: ");print_song(find_first_song(a_to_z[0],"AC-DC"));
   printf("Random Song: ");print_song(random_song(a_to_z[0]));
+  
+  printf("\nRemoving Song: %s","Dirty Deeds Done Dirt Cheap\n");
+  a_to_z[0] = remove_song(a_to_z[0],"dirty Deeds Done Dirt Cheap","AC-DC");
+  print_list(a_to_z[0]);
+  printf("Removing Song: %s","Thunderstruck\n");
+  a_to_z[0] = remove_song(a_to_z[0],"thunderstruck","AC-DC");
+  print_list(a_to_z[0]);
+  printf("Removing Song: %s","Highway to Hell\n");
+  a_to_z[0] = remove_song(a_to_z[0],"highway to Hell","AC-DC");
+  print_list(a_to_z[0]);
+  
+  printf("Adding elements back:\n");
+  a_to_z[0] = insert_node(a_to_z[0],construct_song("Highway to Hell","AC-DC"));
+  a_to_z[0] = insert_node(a_to_z[0],construct_song("Thunderstruck","AC-DC"));
+  a_to_z[0] = insert_node(a_to_z[0],construct_song("Dirty Deeds Done Dirt Cheap","AC-DC"));
+  
+  printf("Should be Dude Looks Like a Lady\n");
+  print_song(find_first_song(a_to_z[0],"aerosmith"));
+  
+  printf("Freeing list... \n");
+  a_to_z[0] = free_list(a_to_z[0]);
+  print_list(a_to_z[0]);
+  
 }
 
 struct song_node *insert_front(struct song_node *head,struct song_node *new) {
@@ -104,6 +112,39 @@ struct song_node *find_first_song(struct song_node *list,char *artist) {
   }
   return NULL;
 }
+
+struct song_node *remove_song(struct song_node *list,char *name, char *artist) {
+	struct song_node *dup = list;
+	if ((!strcasecmp(dup->name,name)) && (!strcasecmp(dup->artist,artist)))  {
+		dup = list->next; 
+		free(list);
+		return dup;
+	}
+	while (dup->next->next) {
+		if ((!strcasecmp(dup->next->name,name)) && (!strcasecmp(dup->next->artist,artist))) {
+			struct song_node *temp = dup->next;			
+			dup->next = temp->next;
+			free(temp);
+			return list;
+		}
+		dup = dup->next;
+	}
+	if ((!strcasecmp(dup->next->name,name)) && (!strcasecmp(dup->next->artist,artist))) {
+		struct song_node *temp = dup->next;			
+		dup->next = temp->next;
+		free(temp);
+	}
+	return list;
+	
+}
+
+struct song_node *free_list(struct song_node *list) {
+	if (list->next) {free_list(list->next);}
+	list->next = NULL;
+	free(list);
+	return NULL;
+}
+
 struct song_node *random_song(struct song_node *list) {
   struct song_node *copy = list;
   int length = 1;
