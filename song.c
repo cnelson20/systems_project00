@@ -12,30 +12,30 @@ int main() {
   srand(time(NULL));
   
   struct song_node *a_to_z[27];
-  a_to_z[0] = construct_song("Highway to Hell","AC-DC");
-  a_to_z[0] = insert_node(a_to_z[0],construct_song("Thunderstruck","AC-DC"));
-  a_to_z[0] = insert_node(a_to_z[0],construct_song("Dirty Deeds Done Dirt Cheap","AC-DC"));
+  a_to_z[0] = construct_song("Highway to Hell","AC/DC");
+  a_to_z[0] = insert_node(a_to_z[0],construct_song("Thunderstruck","AC/DC"));
+  a_to_z[0] = insert_node(a_to_z[0],construct_song("Dirty Deeds Done Dirt Cheap","AC/DC"));
   a_to_z[0] = insert_node(a_to_z[0],construct_song("Dude Looks Like a Lady","Aerosmith"));
   print_list(a_to_z[0]);
 
-  printf("Should be Highway to Hell: ");print_song(find_song(a_to_z[0],"Highway to Hell","AC-DC"));
-  printf("Should be D4C: ");print_song(find_first_song(a_to_z[0],"AC-DC"));
+  printf("Should be Highway to Hell: ");print_song(find_song(a_to_z[0],"Highway to Hell","AC/DC"));
+  printf("Should be D4C: ");print_song(find_first_song(a_to_z[0],"AC/DC"));
   printf("Random Song: ");print_song(random_song(a_to_z[0]));
   
   printf("\nRemoving Song: %s","Dirty Deeds Done Dirt Cheap\n");
-  a_to_z[0] = remove_song(a_to_z[0],"dirty Deeds Done Dirt Cheap","AC-DC");
+  a_to_z[0] = remove_song(a_to_z[0],"dirty Deeds Done Dirt Cheap","AC/DC");
   print_list(a_to_z[0]);
   printf("Removing Song: %s","Thunderstruck\n");
-  a_to_z[0] = remove_song(a_to_z[0],"thunderstruck","AC-DC");
+  a_to_z[0] = remove_song(a_to_z[0],"thunderstruck","AC/DC");
   print_list(a_to_z[0]);
   printf("Removing Song: %s","Highway to Hell\n");
-  a_to_z[0] = remove_song(a_to_z[0],"highway to Hell","AC-DC");
+  a_to_z[0] = remove_song(a_to_z[0],"highway to Hell","AC/DC");
   print_list(a_to_z[0]);
   
   printf("Adding elements back:\n");
-  a_to_z[0] = insert_node(a_to_z[0],construct_song("Highway to Hell","AC-DC"));
-  a_to_z[0] = insert_node(a_to_z[0],construct_song("Thunderstruck","AC-DC"));
-  a_to_z[0] = insert_node(a_to_z[0],construct_song("Dirty Deeds Done Dirt Cheap","AC-DC"));
+  a_to_z[0] = insert_node(a_to_z[0],construct_song("Highway to Hell","AC/DC"));
+  a_to_z[0] = insert_node(a_to_z[0],construct_song("Thunderstruck","AC/DC"));
+  a_to_z[0] = insert_node(a_to_z[0],construct_song("Dirty Deeds Done Dirt Cheap","AC/DC"));
   
   printf("Should be Dude Looks Like a Lady\n");
   print_song(find_first_song(a_to_z[0],"aerosmith"));
