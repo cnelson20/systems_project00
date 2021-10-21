@@ -16,3 +16,9 @@ struct song_node {
   char artist[100];
   struct song_node *next;
 };
+#ifndef __song__
+#define __song__ 
+#define SONG_NAMELENGTH 100
+#define SONG_ARTISTLENGTH 100
+#endif 
+

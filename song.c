@@ -44,6 +44,8 @@ int main() {
   a_to_z[0] = free_list(a_to_z[0]);
   print_list(a_to_z[0]);
   
+  
+  return 0;
 }
 
 struct song_node *insert_front(struct song_node *head,struct song_node *new) {
@@ -73,8 +75,8 @@ struct song_node *insert_node(struct song_node *head, struct song_node *new) {
 
 struct song_node *construct_song(char *n, char *art) {
   struct song_node *s = malloc(sizeof(struct song_node));
-  strncpy(s->name,n,100- 1);
-  strncpy(s->artist,art,sizeof(s->artist) - 1);
+  strncpy(s->name,n,SONG_NAMELENGTH - 1);
+  strncpy(s->artist,art,SONG_ARTISTLENGTH - 1);
   s->next = NULL;
 
   return s;
