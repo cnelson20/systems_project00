@@ -89,7 +89,7 @@ int print_list(struct song_node *head) {
   struct song_node *c = head;
   while (head) {
 	if (c != head) {printf(" | ");}
-    printf("%s by %s",head->name,head->artist);
+    printf("%s: %s",head->artist,head->name);
     head = head->next;
   }
   printf("\n");
