@@ -27,7 +27,14 @@ struct song_node *find_song(struct song_node **lib, char *name, char *artist){
   }
 }
 struct song_node *find_artist(struct song_node **lib, char *artist){
-
+  int letter;
+  letter  = (del->artist[0]) - 'a';
+  if(letter >= 0 && letter < 26) {
+     return find_first_song(lib[letter],artist);
+  } else {
+    return find_first_song(lib[26],artist);
+  }
+  return NULL;
 }
 void print_songs(struct song_node **lib, char letter){
   int letter = tolower(letter) - 'a';
@@ -50,7 +57,13 @@ struct song_node *shuffled_list(struct song_node **lib){
 
 }
 void delete_song(struct song_node **lib, song_node *del){
-
+  int letter;
+  letter  = (del->artist[0]) - 'a';
+  if(letter >= 0 && letter < 26) {
+     return remove_song(lib[letter],del->name,del->artist);
+  } else {
+    return remove_song(lib[26],del->name,del->artist);
+  }
 }
 struct song_node **free_lib(struct song_node **lib){
   int i;
