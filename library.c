@@ -1,6 +1,8 @@
 #include "library.h"
 #include "song.h"
 #include <ctype.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 struct song_node **create_library() {
   song_node **lib= calloc(27,sizeof(struct song_node *));
