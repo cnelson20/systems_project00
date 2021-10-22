@@ -1,3 +1,5 @@
+#ifndef __song__
+#define __song__
 struct song_node;
 struct song_node *construct_song(char *n, char *art);
 int compare_songs(struct song_node *a, struct song_node *b);
@@ -15,9 +17,7 @@ struct song_node {
   char name[100];
   char artist[100];
   struct song_node *next;
-};
-#ifndef __song__
-#define __song__ 
+}; 
 #define SONG_NAMELENGTH 100
 #define SONG_ARTISTLENGTH 100
 #endif 
