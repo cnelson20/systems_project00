@@ -51,7 +51,10 @@ void print_artist_songs(struct song_node **lib, char *artist){
   }
 }
 void print_library(struct song_node **lib){
-
+  int i;
+  for (i = 0; i < 27; i++) {
+    print_list(lib[i]);
+  }
 }
 struct song_node *shuffled_list(struct song_node **lib){
 
