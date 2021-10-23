@@ -12,6 +12,7 @@ struct song_node *find_first_song(struct song_node *list,char *artist);
 struct song_node *random_song(struct song_node *list);
 struct song_node *remove_song(struct song_node *list,char *name, char *artist);
 struct song_node *free_list(struct song_node *list);
+int strcasecmp(const char *, const char *);
 
 struct song_node {
   char name[100];

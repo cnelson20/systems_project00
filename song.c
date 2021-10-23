@@ -5,13 +5,15 @@
 #include <time.h>
 #include "song.h"
 
-int strcasecmp(const char *, const char *);
-
 struct song_node *insert_front(struct song_node *head,struct song_node *new) {
   new->next = head;
   return new;
 }
 struct song_node *insert_node(struct song_node *head, struct song_node *new) {
+  if (head == NULL) {
+	new->next = NULL;
+	return new;
+  }
   struct song_node *copy = head;
   while (copy->next) {
     if (compare_songs(copy,new) > 0) {
@@ -41,17 +43,22 @@ struct song_node *construct_song(char *n, char *art) {
   return s;
 }
 int print_song(struct song_node *s) {
+  if (s == NULL) {
+	printf("NULL\n");
+	return 0;
+  }
   printf("%s by %s\n",s->name,s->artist);
   return 0;
 }
 int print_list(struct song_node *head) {
   struct song_node *c = head;
+  printf("[ "); 
   while (head) {
 	if (c != head) {printf(" | ");}
     printf("%s: %s",head->artist,head->name);
     head = head->next;
   }
-  printf("\n");
+  printf(" ]\n");
   return 0;
 }
 
