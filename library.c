@@ -54,6 +54,7 @@ void print_library(struct song_node **lib){
   int i;
   for (i = 0; i < 27; i++) {
     print_list(lib[i]);
+    printf("\n");
   }
 }
 struct song_node *shuffled_list(struct song_node **lib){
