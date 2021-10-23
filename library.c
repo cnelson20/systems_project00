@@ -70,8 +70,33 @@ void print_library(struct song_node **lib){
   printf("\n");
 }
 struct song_node *shuffled_list(struct song_node **lib, int length){
-
+  int lengths[27];
+  int counter;
+  int sizecount;
+  int songnum;
+  struct song_node *rand;
+  sizecount = 0;
+  for (counter = 0; counter < 27; counter++) {
+    sizecount += helper(lib[counter]);
+    lengths[counter] = sizecount;
+  }
+  int random;
+  random = rand() % sizecount;
+  counter = 0;
+  while(random > lengths[counter]) {
+      counter++;
+  }
+  songnum = random - lengths[counter];
+  rand->name = lib[counter][songnum]->name;
+  rand->artist = lib[counter][songnum]->artist;
+  if(length = 0) {
+    next->NULL;
+  } else {
+    next->shuffled_list(lib,length--);
+  }
+  return rand;
 }
+
 void delete_song(struct song_node **lib, struct song_node *del){
   if (del == NULL) {printf("Cannot delete null value!\n");return;}
   int letter;
@@ -89,4 +114,13 @@ struct song_node **clear_lib(struct song_node **lib){
 	lib[i] = NULL;
   }
   return lib;
+}
+
+int helper(struct song_node *s) {
+  int l = 0;
+  while (s) {
+    s = s->next;
+    l++;
+  }
+  return l;
 }
