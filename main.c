@@ -131,8 +131,11 @@ int main() {
   add_song(lib,construct_song("Highway to Hell","AC/DC"));
   print_library(lib);
   
-  printf("\n=====================\n");
+  printf("=====================\n");
   printf("testing shuffled_list:\n");
+  
+  struct song_node *shuff = shuffled_list(lib,2);
+  print_list(shuff);
   
   return 0;
 }
